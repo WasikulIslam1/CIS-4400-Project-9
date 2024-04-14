@@ -1,1 +1,1 @@
-This will have the scripts for getting the housing market sales data
+This will have all info related to housing market data
