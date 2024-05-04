@@ -1,0 +1,58 @@
+CREATE SCHEMA INSTANCE;
+
+CREATE TABLE watertoxicity_lgl.INSTANCE.dim_crimerate ( 
+	crime_id string NOT NULL  ,
+	crimerate numeric(10,5)  ,
+	typeofcrime numeric(10,5)  
+ );
+
+ALTER TABLE watertoxicity_lgl.INSTANCE.dim_crimerate ADD PRIMARY KEY ( crime_id )  NOT ENFORCED;
+
+CREATE TABLE watertoxicity_lgl.INSTANCE.dim_housingmarket ( 
+	housing_id string NOT NULL  ,
+	minsaleprice numeric(50)  ,
+	maxsaleprice numeric  ,
+	mediansaleprice numeric  ,
+	averagesaleprice numeric(50)  
+ );
+
+ALTER TABLE watertoxicity_lgl.INSTANCE.dim_housingmarket ADD PRIMARY KEY ( housing_id )  NOT ENFORCED;
+
+CREATE TABLE watertoxicity_lgl.INSTANCE.dim_location ( 
+	location_id string NOT NULL  ,
+	countyname int64  ,
+	state string  ,
+	costofliving int64  ,
+	medianincome string  ,
+	zipcode numeric  ,
+	latitude numeric  ,
+	longitude numeric  
+ );
+
+ALTER TABLE watertoxicity_lgl.INSTANCE.dim_location ADD PRIMARY KEY ( location_id )  NOT ENFORCED;
+
+CREATE TABLE watertoxicity_lgl.INSTANCE.dim_schoolrating ( 
+	school_id numeric NOT NULL  ,
+	schoolrating numeric(10,5)  ,
+	schoolname string  
+ );
+
+ALTER TABLE watertoxicity_lgl.INSTANCE.dim_schoolrating ADD PRIMARY KEY ( school_id )  NOT ENFORCED;
+
+CREATE TABLE watertoxicity_lgl.INSTANCE.realestate_facts ( 
+	housing_id string NOT NULL  ,
+	fact_id int64 NOT NULL  ,
+	crime_id string NOT NULL  ,
+	crime_id string NOT NULL  ,
+	school_id numeric NOT NULL  ,
+	location_id int64 NOT NULL  ,
+	state_id string NOT NULL  ,
+	listingprice numeric NOT NULL  ,
+	saleprice numeric  ,
+	minlivingwage int64  ,
+	maxlivingwage numeric(10,5)  ,
+	avglivingwage numeric(10,5)  
+ );
+
+ALTER TABLE watertoxicity_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( school_id, housing_id, crime_id, state_id, location_id )  NOT ENFORCED;
+
