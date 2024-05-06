@@ -40,7 +40,6 @@ CREATE TABLE watertoxicity_lgl.INSTANCE.realestate_facts (
 	housing_id string NOT NULL  ,
 	fact_id int64 NOT NULL  ,
 	crime_id string NOT NULL  ,
-	crime_id string NOT NULL  ,
 	school_id numeric NOT NULL  ,
 	location_id int64 NOT NULL  ,
 	state_id string NOT NULL  ,
@@ -51,4 +50,4 @@ CREATE TABLE watertoxicity_lgl.INSTANCE.realestate_facts (
 	avglivingwage numeric(10,5)  
  );
 
-ALTER TABLE watertoxicity_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( school_id, housing_id, crime_id, state_id, location_id )  NOT ENFORCED;
+ALTER TABLE watertoxicity_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, state_id, location_id )  NOT ENFORCED;

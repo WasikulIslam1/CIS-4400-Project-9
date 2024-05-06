@@ -38,7 +38,6 @@ CREATE  TABLE "realestate".realestate_facts (
 	housing_id           VARCHAR  NOT NULL  ,
 	fact_id              BIGINT  NOT NULL  ,
 	crime_id             TEXT  NOT NULL  ,
-	crime_id             VARCHAR  NOT NULL  ,
 	school_id            NUMERIC  NOT NULL  ,
 	location_id          INT  NOT NULL  ,
 	state_id             VARCHAR(15)  NOT NULL  ,
@@ -47,5 +46,5 @@ CREATE  TABLE "realestate".realestate_facts (
 	minlivingwage        INT    ,
 	maxlivingwage        DECIMAL(10,5)    ,
 	avglivingwage        DECIMAL(10,5)    ,
-	CONSTRAINT pk PRIMARY KEY ( school_id, housing_id, crime_id, state_id, location_id )
+	CONSTRAINT pk_realestate_facts PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, state_id, location_id )
  );

@@ -44,7 +44,6 @@
 			<column name="housing_id" prior="location_id" type="VARCHAR" jt="12" mandatory="y" />
 			<column name="fact_id" type="BIGINT" jt="-5" mandatory="y" />
 			<column name="crime_id" prior="county_id" type="TEXT" jt="-1" mandatory="y" />
-			<column name="crime_id" prior="analyte_id" type="VARCHAR" jt="12" mandatory="y" />
 			<column name="school_id" prior="county_id" type="NUMERIC" jt="2" mandatory="y" />
 			<column name="location_id" type="INT" jt="4" mandatory="y" />
 			<column name="state_id" prior="result" type="VARCHAR" length="15" jt="12" mandatory="y" />
@@ -53,6 +52,9 @@
 			<column name="minlivingwage" prior="calculatedvalue" type="INT" jt="4" />
 			<column name="maxlivingwage" prior="evalthreshold" type="DECIMAL" length="10" decimal="5" jt="3" />
 			<column name="avglivingwage" prior="dilution" type="DECIMAL" length="10" decimal="5" jt="3" />
+			<index name="pk_realestate_facts" unique="PRIMARY_KEY" >
+				<column name="fact_id" />
+			</index>
 			<fk name="fk_facts_waterquality_dim_collection" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_schoolrating" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="school_id" pk="school_id" />
 			</fk>
