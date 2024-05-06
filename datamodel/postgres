@@ -1,0 +1,51 @@
+CREATE SCHEMA IF NOT EXISTS "realestate";
+
+CREATE  TABLE "realestate".dim_crimerate ( 
+	crime_id             TEXT  NOT NULL  ,
+	crimerate            DECIMAL(10,5)    ,
+	typeofcrime          DECIMAL(10,5)    ,
+	CONSTRAINT pk_dim_station PRIMARY KEY ( crime_id )
+ );
+
+CREATE  TABLE "realestate".dim_housingmarket ( 
+	housing_id           VARCHAR  NOT NULL  ,
+	minsaleprice         NUMERIC(50)    ,
+	maxsaleprice         NUMERIC    ,
+	mediansaleprice      NUMERIC    ,
+	averagesaleprice     NUMERIC(50)    ,
+	CONSTRAINT pk_dim_sample PRIMARY KEY ( housing_id )
+ );
+
+CREATE  TABLE "realestate".dim_location ( 
+	location_id          VARCHAR  NOT NULL  ,
+	"state"              VARCHAR    ,
+	zipcode              NUMERIC    ,
+	latitude             NUMERIC    ,
+	longitude            NUMERIC    ,
+	CONSTRAINT pk_dim_date PRIMARY KEY ( location_id )
+ );
+
+CREATE UNIQUE INDEX unq_state ON "realestate".dim_location ( "state" );
+
+CREATE  TABLE "realestate".dim_schoolrating ( 
+	school_id            NUMERIC  NOT NULL  ,
+	schoolrating         NUMERIC(10,5)    ,
+	schoolname           VARCHAR    ,
+	CONSTRAINT pk_dim_collection PRIMARY KEY ( school_id )
+ );
+
+CREATE  TABLE "realestate".realestate_facts ( 
+	housing_id           VARCHAR  NOT NULL  ,
+	fact_id              BIGINT  NOT NULL  ,
+	crime_id             TEXT  NOT NULL  ,
+	crime_id             VARCHAR  NOT NULL  ,
+	school_id            NUMERIC  NOT NULL  ,
+	location_id          INT  NOT NULL  ,
+	state_id             VARCHAR(15)  NOT NULL  ,
+	listingprice         NUMERIC  NOT NULL  ,
+	saleprice            NUMERIC    ,
+	minlivingwage        INT    ,
+	maxlivingwage        DECIMAL(10,5)    ,
+	avglivingwage        DECIMAL(10,5)    ,
+	CONSTRAINT pk PRIMARY KEY ( school_id, housing_id, crime_id, state_id, location_id )
+ );
