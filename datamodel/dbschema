@@ -20,10 +20,7 @@ ALTER TABLE watertoxicity_lgl.INSTANCE.dim_housingmarket ADD PRIMARY KEY ( housi
 
 CREATE TABLE watertoxicity_lgl.INSTANCE.dim_location ( 
 	location_id string NOT NULL  ,
-	countyname int64  ,
 	state string  ,
-	costofliving int64  ,
-	medianincome string  ,
 	zipcode numeric  ,
 	latitude numeric  ,
 	longitude numeric  
@@ -55,4 +52,3 @@ CREATE TABLE watertoxicity_lgl.INSTANCE.realestate_facts (
  );
 
 ALTER TABLE watertoxicity_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( school_id, housing_id, crime_id, state_id, location_id )  NOT ENFORCED;
-
