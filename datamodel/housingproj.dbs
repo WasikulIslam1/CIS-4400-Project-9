@@ -2,34 +2,31 @@
 <project name="watertoxicity_lgl" id="LogicalDesign-2279" database="LogicalDesign" >
 	<schema name="INSTANCE" catalogname="watertoxicity_lgl" >
 		<table name="dim_crimerate" prior="dim_station" >
-			<column name="crime_id" prior="county_id" type="TEXT" jt="-1" mandatory="y" />
+			<column name="crime_id" prior="county_id" type="VARCHAR" jt="12" mandatory="y" />
 			<column name="crimerate" prior="latitude" type="DECIMAL" length="10" decimal="5" jt="3" />
-			<column name="typeofcrime" prior="longitude" type="DECIMAL" length="10" decimal="5" jt="3" />
+			<column name="typeofcrime" prior="longitude" type="VARCHAR" length="10" jt="12" />
 			<index name="pk_dim_station" unique="PRIMARY_KEY" >
 				<column name="crime_id" />
 			</index>
 		</table>
 		<table name="dim_housingmarket" prior="dim_sample" >
 			<column name="housing_id" prior="county_id" type="VARCHAR" jt="12" mandatory="y" />
-			<column name="minsaleprice" prior="sampletypecode" type="NUMERIC" length="50" jt="2" />
+			<column name="minsaleprice" prior="sampletypecode" type="NUMERIC" jt="2" />
 			<column name="maxsaleprice" prior="sampledate" type="NUMERIC" jt="2" />
 			<column name="mediansaleprice" prior="samplecomments" type="NUMERIC" jt="2" />
-			<column name="averagesaleprice" prior="dataquality" type="NUMERIC" length="50" jt="2" />
+			<column name="averagesaleprice" prior="dataquality" type="NUMERIC" jt="2" />
 			<index name="pk_dim_sample" unique="PRIMARY_KEY" >
 				<column name="housing_id" />
 			</index>
 		</table>
 		<table name="dim_location" prior="dim_date" >
 			<column name="location_id" prior="locatiion_id" type="VARCHAR" jt="12" mandatory="y" />
-			<column name="state" prior="state_id" type="VARCHAR" jt="12" />
 			<column name="zipcode" type="NUMERIC" jt="2" />
 			<column name="latitude" type="NUMERIC" jt="2" />
 			<column name="longitude" type="NUMERIC" jt="2" />
+			<column name="state_id" type="VARCHAR" jt="12" />
 			<index name="pk_dim_date" unique="PRIMARY_KEY" >
 				<column name="location_id" />
-			</index>
-			<index name="unq_state" unique="UNIQUE_INDEX" >
-				<column name="state" />
 			</index>
 		</table>
 		<table name="dim_schoolrating" prior="dim_collection" >
@@ -43,15 +40,15 @@
 		<table name="realestate_facts" prior="facts_waterquality" >
 			<column name="housing_id" prior="location_id" type="VARCHAR" jt="12" mandatory="y" />
 			<column name="fact_id" type="BIGINT" jt="-5" mandatory="y" />
-			<column name="crime_id" prior="county_id" type="TEXT" jt="-1" mandatory="y" />
+			<column name="crime_id" prior="county_id" type="VARCHAR" jt="12" mandatory="y" />
 			<column name="school_id" prior="county_id" type="NUMERIC" jt="2" mandatory="y" />
 			<column name="location_id" type="INT" jt="4" mandatory="y" />
 			<column name="state_id" prior="result" type="VARCHAR" length="15" jt="12" mandatory="y" />
 			<column name="listingprice" prior="date_id" type="NUMERIC" jt="2" mandatory="y" />
 			<column name="saleprice" prior="percenteffect" type="NUMERIC" jt="2" />
-			<column name="minlivingwage" prior="calculatedvalue" type="INT" jt="4" />
-			<column name="maxlivingwage" prior="evalthreshold" type="DECIMAL" length="10" decimal="5" jt="3" />
-			<column name="avglivingwage" prior="dilution" type="DECIMAL" length="10" decimal="5" jt="3" />
+			<column name="minlivingwage" prior="calculatedvalue" type="NUMERIC" jt="2" />
+			<column name="maxlivingwage" prior="evalthreshold" type="NUMERIC" jt="2" />
+			<column name="avglivingwage" prior="dilution" type="NUMERIC" jt="2" />
 			<index name="pk_realestate_facts" unique="PRIMARY_KEY" >
 				<column name="fact_id" />
 			</index>
@@ -64,9 +61,7 @@
 			<fk name="fk_facts_waterquality_dim_station" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_crimerate" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="crime_id" pk="crime_id" />
 			</fk>
-			<fk name="fk_realestate_facts_dim_location_0" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
-				<fk_column name="state_id" pk="state" />
-			</fk>
+			<fk name="fk_realestate_facts_dim_location_0" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" />
 			<fk name="fk_realestate_facts_dim_location" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="location_id" pk="location_id" />
 			</fk>
