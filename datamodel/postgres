@@ -52,3 +52,4 @@ CREATE TABLE realestate.realestate_facts (
     CONSTRAINT fk_realestate_facts_school_id FOREIGN KEY (school_id) REFERENCES realestate.dim_schoolrating (school_id),
     CONSTRAINT fk_realestate_facts_location_id FOREIGN KEY (location_id) REFERENCES realestate.dim_location (location_id)
 );
+sd

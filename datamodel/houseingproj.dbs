@@ -11,21 +11,24 @@
 		</table>
 		<table name="dim_housingmarket" prior="dim_sample" >
 			<column name="housing_id" prior="county_id" type="VARCHAR" jt="12" mandatory="y" />
+			<column name="property_county" type="VARCHAR" jt="12" />
+			<column name="houseaddress" type="VARCHAR" length="100" jt="12" />
 			<column name="minsaleprice" prior="sampletypecode" type="NUMERIC" jt="2" />
 			<column name="maxsaleprice" prior="sampledate" type="NUMERIC" jt="2" />
 			<column name="mediansaleprice" prior="samplecomments" type="NUMERIC" jt="2" />
 			<column name="averagesaleprice" prior="dataquality" type="NUMERIC" jt="2" />
-			<column name="houseaddress" type="VARCHAR" length="100" jt="12" />
 			<index name="pk_dim_sample" unique="PRIMARY_KEY" >
 				<column name="housing_id" />
 			</index>
 		</table>
 		<table name="dim_location" prior="dim_date" >
 			<column name="location_id" prior="locatiion_id" type="VARCHAR" jt="12" mandatory="y" />
+			<column name="county_fips" type="INT" jt="4" />
+			<column name="state_id" type="VARCHAR" jt="12" />
+			<column name="state_name" prior="zipcode" type="VARCHAR" jt="12" />
 			<column name="zipcode" type="NUMERIC" jt="2" />
 			<column name="latitude" type="NUMERIC" jt="2" />
 			<column name="longitude" type="NUMERIC" jt="2" />
-			<column name="state_id" type="VARCHAR" jt="12" />
 			<index name="pk_dim_date" unique="PRIMARY_KEY" >
 				<column name="location_id" />
 			</index>
@@ -45,7 +48,6 @@
 			<column name="school_id" prior="county_id" type="NUMERIC" jt="2" mandatory="y" />
 			<column name="location_id" type="INT" jt="4" mandatory="y" />
 			<column name="state_id" prior="result" type="VARCHAR" length="15" jt="12" mandatory="y" />
-			<column name="listingprice" prior="date_id" type="NUMERIC" jt="2" mandatory="y" />
 			<column name="saleprice" prior="percenteffect" type="NUMERIC" jt="2" />
 			<column name="minlivingwage" prior="calculatedvalue" type="NUMERIC" jt="2" />
 			<column name="maxlivingwage" prior="evalthreshold" type="NUMERIC" jt="2" />
