@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="watertoxicity_lgl" id="LogicalDesign-2279" database="LogicalDesign" >
-	<schema name="INSTANCE" catalogname="watertoxicity_lgl" >
+<project name="realestate_lgl" id="LogicalDesign-2279" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="realestate_lgl" >
 		<table name="dim_crimerate" prior="dim_station" >
 			<column name="crime_id" prior="county_id" type="VARCHAR" jt="12" mandatory="y" />
 			<column name="crimerate" prior="latitude" type="DECIMAL" length="10" decimal="5" jt="3" />
@@ -15,6 +15,7 @@
 			<column name="maxsaleprice" prior="sampledate" type="NUMERIC" jt="2" />
 			<column name="mediansaleprice" prior="samplecomments" type="NUMERIC" jt="2" />
 			<column name="averagesaleprice" prior="dataquality" type="NUMERIC" jt="2" />
+			<column name="houseaddress" type="VARCHAR" length="100" jt="12" />
 			<index name="pk_dim_sample" unique="PRIMARY_KEY" >
 				<column name="housing_id" />
 			</index>
@@ -52,27 +53,27 @@
 			<index name="pk_realestate_facts" unique="PRIMARY_KEY" >
 				<column name="fact_id" />
 			</index>
-			<fk name="fk_facts_waterquality_dim_collection" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_schoolrating" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_facts_waterquality_dim_collection" virtual="y" to_schema="realestate_lgl.INSTANCE" to_table="dim_schoolrating" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="school_id" pk="school_id" />
 			</fk>
-			<fk name="fk_facts_waterquality_dim_sample" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_housingmarket" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_facts_waterquality_dim_sample" virtual="y" to_schema="realestate_lgl.INSTANCE" to_table="dim_housingmarket" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="housing_id" pk="housing_id" />
 			</fk>
-			<fk name="fk_facts_waterquality_dim_station" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_crimerate" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_facts_waterquality_dim_station" virtual="y" to_schema="realestate_lgl.INSTANCE" to_table="dim_crimerate" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="crime_id" pk="crime_id" />
 			</fk>
-			<fk name="fk_realestate_facts_dim_location_0" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" />
-			<fk name="fk_realestate_facts_dim_location" virtual="y" to_schema="watertoxicity_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+			<fk name="fk_realestate_facts_dim_location_0" virtual="y" to_schema="realestate_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" />
+			<fk name="fk_realestate_facts_dim_location" virtual="y" to_schema="realestate_lgl.INSTANCE" to_table="dim_location" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
 				<fk_column name="location_id" pk="location_id" />
 			</fk>
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-14a4" show_relation="columns" >
-		<entity schema="watertoxicity_lgl.INSTANCE" name="dim_crimerate" color="C1D8EE" x="731" y="204" />
-		<entity schema="watertoxicity_lgl.INSTANCE" name="dim_housingmarket" color="C1D8EE" x="255" y="561" />
-		<entity schema="watertoxicity_lgl.INSTANCE" name="dim_location" color="C1D8EE" x="731" y="425" />
-		<entity schema="watertoxicity_lgl.INSTANCE" name="dim_schoolrating" color="C1D8EE" x="119" y="306" />
-		<entity schema="watertoxicity_lgl.INSTANCE" name="realestate_facts" color="C1D8EE" x="459" y="289" />
+		<entity schema="realestate_lgl.INSTANCE" name="dim_crimerate" color="C1D8EE" x="731" y="204" />
+		<entity schema="realestate_lgl.INSTANCE" name="dim_housingmarket" color="C1D8EE" x="255" y="561" />
+		<entity schema="realestate_lgl.INSTANCE" name="dim_location" color="C1D8EE" x="731" y="425" />
+		<entity schema="realestate_lgl.INSTANCE" name="dim_schoolrating" color="C1D8EE" x="119" y="306" />
+		<entity schema="realestate_lgl.INSTANCE" name="realestate_facts" color="C1D8EE" x="459" y="289" />
 		<callout x="51" y="51" pointer="Round" >
 			<comment><![CDATA[This is a layout - a diagram with tools.
 - Create new entities by right-clicking the layout. 

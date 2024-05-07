@@ -7,14 +7,16 @@ CREATE TABLE realestate.dim_crimerate (
     CONSTRAINT pk_dim_station PRIMARY KEY (crime_id)
 );
 
-CREATE TABLE realestate.dim_housingmarket (
-    housing_id VARCHAR NOT NULL,
-    minsaleprice NUMERIC,
-    maxsaleprice NUMERIC,
-    mediansaleprice NUMERIC,
-    averagesaleprice NUMERIC,
-    CONSTRAINT pk_dim_sample PRIMARY KEY (housing_id)
-);
+CREATE  TABLE realestate.dim_housingmarket (
+	housing_id           VARCHAR  NOT NULL  ,
+	minsaleprice         NUMERIC    ,
+	maxsaleprice         NUMERIC    ,
+	mediansaleprice      NUMERIC    ,
+	averagesaleprice     NUMERIC    ,
+	houseaddress         VARCHAR(100)    ,
+	CONSTRAINT pk_dim_sample PRIMARY KEY ( housing_id )
+ );
+
 
 CREATE TABLE realestate.dim_location (
     location_id VARCHAR NOT NULL,

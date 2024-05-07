@@ -1,24 +1,25 @@
 CREATE SCHEMA INSTANCE;
 
-CREATE TABLE watertoxicity_lgl.INSTANCE.dim_crimerate ( 
+CREATE TABLE realestate_lgl.INSTANCE.dim_crimerate ( 
 	crime_id string NOT NULL  ,
 	crimerate numeric(10,5)  ,
 	typeofcrime string  
  );
 
-ALTER TABLE watertoxicity_lgl.INSTANCE.dim_crimerate ADD PRIMARY KEY ( crime_id )  NOT ENFORCED;
+ALTER TABLE realestate_lgl.INSTANCE.dim_crimerate ADD PRIMARY KEY ( crime_id )  NOT ENFORCED;
 
-CREATE TABLE watertoxicity_lgl.INSTANCE.dim_housingmarket ( 
+CREATE TABLE realestate_lgl.INSTANCE.dim_housingmarket ( 
 	housing_id string NOT NULL  ,
 	minsaleprice numeric  ,
 	maxsaleprice numeric  ,
 	mediansaleprice numeric  ,
-	averagesaleprice numeric  
+	averagesaleprice numeric  ,
+	houseaddress string  
  );
 
-ALTER TABLE watertoxicity_lgl.INSTANCE.dim_housingmarket ADD PRIMARY KEY ( housing_id )  NOT ENFORCED;
+ALTER TABLE realestate_lgl.INSTANCE.dim_housingmarket ADD PRIMARY KEY ( housing_id )  NOT ENFORCED;
 
-CREATE TABLE watertoxicity_lgl.INSTANCE.dim_location ( 
+CREATE TABLE realestate_lgl.INSTANCE.dim_location ( 
 	location_id string NOT NULL  ,
 	zipcode numeric  ,
 	latitude numeric  ,
@@ -26,17 +27,17 @@ CREATE TABLE watertoxicity_lgl.INSTANCE.dim_location (
 	state_id string  
  );
 
-ALTER TABLE watertoxicity_lgl.INSTANCE.dim_location ADD PRIMARY KEY ( location_id )  NOT ENFORCED;
+ALTER TABLE realestate_lgl.INSTANCE.dim_location ADD PRIMARY KEY ( location_id )  NOT ENFORCED;
 
-CREATE TABLE watertoxicity_lgl.INSTANCE.dim_schoolrating ( 
+CREATE TABLE realestate_lgl.INSTANCE.dim_schoolrating ( 
 	school_id numeric NOT NULL  ,
 	schoolrating numeric(10,5)  ,
 	schoolname string  
  );
 
-ALTER TABLE watertoxicity_lgl.INSTANCE.dim_schoolrating ADD PRIMARY KEY ( school_id )  NOT ENFORCED;
+ALTER TABLE realestate_lgl.INSTANCE.dim_schoolrating ADD PRIMARY KEY ( school_id )  NOT ENFORCED;
 
-CREATE TABLE watertoxicity_lgl.INSTANCE.realestate_facts ( 
+CREATE TABLE realestate_lgl.INSTANCE.realestate_facts ( 
 	housing_id string NOT NULL  ,
 	fact_id int64 NOT NULL  ,
 	crime_id string NOT NULL  ,
@@ -51,4 +52,4 @@ CREATE TABLE watertoxicity_lgl.INSTANCE.realestate_facts (
 	location_id_001 int64 NOT NULL  
  );
 
-ALTER TABLE watertoxicity_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, location_id_001, location_id )  NOT ENFORCED;
+ALTER TABLE realestate_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, location_id_001, location_id )  NOT ENFORCED;
