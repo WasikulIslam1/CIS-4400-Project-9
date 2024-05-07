@@ -21,6 +21,8 @@ ALTER TABLE realestate_lgl.INSTANCE.dim_housingmarket ADD PRIMARY KEY ( housing_
 
 CREATE TABLE realestate_lgl.INSTANCE.dim_location ( 
 	location_id string NOT NULL  ,
+	county_fips numeric ,
+	county_name numeric ,
 	zipcode numeric  ,
 	latitude numeric  ,
 	longitude numeric  ,
