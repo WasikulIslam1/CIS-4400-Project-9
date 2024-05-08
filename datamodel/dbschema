@@ -55,3 +55,4 @@ CREATE TABLE realestate_lgl.INSTANCE.realestate_facts (
  );
 
 ALTER TABLE realestate_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, location_id_001, location_id )  NOT ENFORCED;
+numeric 
