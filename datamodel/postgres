@@ -1,11 +1,18 @@
-CREATE SCHEMA IF NOT EXISTS realestate;
+CREATE SCHEMA IF NOT EXISTS "realestate";
 
-CREATE TABLE realestate.dim_crimerate (
-    crime_id VARCHAR NOT NULL,
-    crimerate DECIMAL(10,5),
-    typeofcrime VARCHAR(10),
-    CONSTRAINT pk_dim_station PRIMARY KEY (crime_id)
-);
+CREATE  TABLE "realestate".dim_crimerate ( 
+	state_id             varchar    ,
+	crime_id             numeric  NOT NULL  ,
+	avgtheft             numeric    ,
+	avgrobbery           numeric    ,
+	avgvandalism         numeric    ,
+	avgshooting          numeric    ,
+	avgarson             numeric    ,
+	avgarrest            numeric    ,
+	avgassault           numeric    ,
+	avgother             numeric    ,
+	CONSTRAINT pk_dim_station PRIMARY KEY ( crime_id )
+ );
 
 CREATE  TABLE "realestate".dim_housingmarket ( 
 	housing_id           integer  NOT NULL  ,
@@ -19,38 +26,38 @@ CREATE  TABLE "realestate".dim_housingmarket (
 	CONSTRAINT pk_dim_sample PRIMARY KEY ( housing_id )
  );
 
+CREATE  TABLE "realestate".dim_location ( 
+	location_id          varchar  NOT NULL  ,
+	county_fips          integer    ,
+	county_name          varchar(100)    ,
+	state_id             varchar    ,
+	state_name           varchar    ,
+	zipcode              numeric    ,
+	latitude             numeric    ,
+	longitude            numeric    ,
+	CONSTRAINT pk_dim_date PRIMARY KEY ( location_id )
+ );
 
-CREATE TABLE realestate.dim_location (
-    location_id VARCHAR NOT NULL,
-    zipcode NUMERIC,
-    latitude NUMERIC,
-    longitude NUMERIC,
-    state_id VARCHAR,
-    CONSTRAINT pk_dim_date PRIMARY KEY (location_id)
-);
+CREATE  TABLE "realestate".dim_schoolrating ( 
+	school_id            numeric  NOT NULL  ,
+	schoolrating         numeric(10,5)    ,
+	schoolname           varchar    ,
+	county_name          varchar(100)    ,
+	state_id             varchar    ,
+	CONSTRAINT pk_dim_collection PRIMARY KEY ( school_id )
+ );
 
-CREATE TABLE realestate.dim_schoolrating (
-    school_id NUMERIC NOT NULL,
-    schoolrating NUMERIC(10,5),
-    schoolname VARCHAR,
-    CONSTRAINT pk_dim_collection PRIMARY KEY (school_id)
-);
-
-CREATE TABLE realestate.realestate_facts (
-    housing_id VARCHAR NOT NULL,
-    fact_id BIGINT NOT NULL,
-    crime_id VARCHAR NOT NULL,
-    school_id NUMERIC NOT NULL,
-    location_id VARCHAR NOT NULL,  -- Changed to VARCHAR to match type in dim_location
-    state_id VARCHAR(15) NOT NULL,
-    listingprice NUMERIC NOT NULL,
-    saleprice NUMERIC,
-    minlivingwage NUMERIC,
-    maxlivingwage NUMERIC,
-    avglivingwage NUMERIC,
-    CONSTRAINT pk_realestate_facts PRIMARY KEY (fact_id),
-    CONSTRAINT fk_realestate_facts_housing_id FOREIGN KEY (housing_id) REFERENCES realestate.dim_housingmarket (housing_id),
-    CONSTRAINT fk_realestate_facts_crime_id FOREIGN KEY (crime_id) REFERENCES realestate.dim_crimerate (crime_id),
-    CONSTRAINT fk_realestate_facts_school_id FOREIGN KEY (school_id) REFERENCES realestate.dim_schoolrating (school_id),
-    CONSTRAINT fk_realestate_facts_location_id FOREIGN KEY (location_id) REFERENCES realestate.dim_location (location_id)
-);
+CREATE  TABLE "realestate".realestate_facts ( 
+	fact_id              bigint  NOT NULL  ,
+	housing_id           integer  NOT NULL  ,
+	crime_id             numeric  NOT NULL  ,
+	school_id            numeric  NOT NULL  ,
+	location_id          integer  NOT NULL  ,
+	county_name          varchar(100)    ,
+	state_id             varchar    ,
+	saleprice            numeric    ,
+	minlivingwage        numeric    ,
+	maxlivingwage        numeric    ,
+	avglivingwage        numeric    ,
+	CONSTRAINT pk_realestate_facts PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, location_id )
+ );
