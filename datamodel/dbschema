@@ -1,32 +1,42 @@
 CREATE SCHEMA INSTANCE;
 
 CREATE TABLE realestate_lgl.INSTANCE.dim_crimerate ( 
-	crime_id string NOT NULL  ,
-	crimerate numeric(10,5)  ,
-	typeofcrime string  
+	state_id string  ,
+	crime_id numeric NOT NULL  ,
+	avgtheft numeric  ,
+	avgrobbery numeric  ,
+	avgvandalism numeric  ,
+	avgshooting numeric  ,
+	avgarson numeric  ,
+	avgarrest numeric  ,
+	avgassault numeric  ,
+	avgother numeric  
  );
 
 ALTER TABLE realestate_lgl.INSTANCE.dim_crimerate ADD PRIMARY KEY ( crime_id )  NOT ENFORCED;
 
 CREATE TABLE realestate_lgl.INSTANCE.dim_housingmarket ( 
-	housing_id string NOT NULL  ,
+	housing_id int64 NOT NULL  ,
+	state_id string  ,
+	county_name string  ,
+	houseaddress string  ,
 	minsaleprice numeric  ,
 	maxsaleprice numeric  ,
 	mediansaleprice numeric  ,
-	averagesaleprice numeric  ,
-	houseaddress string  
+	averagesaleprice numeric  
  );
 
 ALTER TABLE realestate_lgl.INSTANCE.dim_housingmarket ADD PRIMARY KEY ( housing_id )  NOT ENFORCED;
 
 CREATE TABLE realestate_lgl.INSTANCE.dim_location ( 
-	location_id numeric NOT NULL  ,
-	county_fips numeric ,
-	county_name numeric ,
+	location_id string NOT NULL  ,
+	county_fips int64  ,
+	county_name string  ,
+	state_id string  ,
+	state_name string  ,
 	zipcode numeric  ,
 	latitude numeric  ,
-	longitude numeric  ,
-	state_name string  
+	longitude numeric  
  );
 
 ALTER TABLE realestate_lgl.INSTANCE.dim_location ADD PRIMARY KEY ( location_id )  NOT ENFORCED;
@@ -34,24 +44,25 @@ ALTER TABLE realestate_lgl.INSTANCE.dim_location ADD PRIMARY KEY ( location_id )
 CREATE TABLE realestate_lgl.INSTANCE.dim_schoolrating ( 
 	school_id numeric NOT NULL  ,
 	schoolrating numeric(10,5)  ,
-	schoolname string  
+	schoolname string  ,
+	county_name string  ,
+	state_id string  
  );
 
 ALTER TABLE realestate_lgl.INSTANCE.dim_schoolrating ADD PRIMARY KEY ( school_id )  NOT ENFORCED;
 
 CREATE TABLE realestate_lgl.INSTANCE.realestate_facts ( 
-	housing_id string NOT NULL  ,
 	fact_id int64 NOT NULL  ,
-	crime_id string NOT NULL  ,
+	housing_id int64 NOT NULL  ,
+	crime_id numeric NOT NULL  ,
 	school_id numeric NOT NULL  ,
 	location_id int64 NOT NULL  ,
-	state_id string NOT NULL  ,
-	listingprice numeric NOT NULL  ,
+	county_name string  ,
+	state_id string  ,
 	saleprice numeric  ,
 	minlivingwage numeric  ,
 	maxlivingwage numeric  ,
-	avglivingwage numeric  ,
-	location_id_001 int64 NOT NULL  
+	avglivingwage numeric  
  );
 
-ALTER TABLE realestate_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, location_id_001, location_id )  NOT ENFORCED;
+ALTER TABLE realestate_lgl.INSTANCE.realestate_facts ADD PRIMARY KEY ( fact_id, school_id, housing_id, crime_id, location_id )  NOT ENFORCED;
